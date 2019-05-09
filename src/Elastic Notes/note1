@@ -117,12 +117,31 @@ b)Filter
 this step we have to do before setting index 
 Configure the index Structure
 {
-	"settings":{
+	"settings":{ --->(Higherlevel info)no.of.shards ? no.of replica
 		...
 	},
-	"mapping":{
+	"mapping":{ ---> Data types of Fields Inforamtion
 		...
 	},
 }
+but this is not right way to follow ES Structure
+////////Setting Structure Manually by DEV//////
+PUT /customers
+{
+	"settings":{ 
+		"number_of_shards" : 2,
+		"number_of_replicas" :1
+	},
+	"mapping":{}
+}
 
+PUT /customers/_mapping/online
+{
+	"properties" : {
+		"name" : {
+			"type" : "string", ///depcreated in latest versions ///better use "text"
+			"analyzer" : "standard" // applied on the name field
+		}
+	}
+}
 
