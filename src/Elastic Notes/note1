@@ -1,0 +1,96 @@
+Elastic Search  ----->>> opensource
+what?
+--Real time distributed and analytic engine
+--Open Source --dev using java
+--based on Lucene engine on top of it we have REST interface
+--Support Full-text and completely based on documents ---not tables and schemas --most of other search engines relay on this
+--Used for Single Page application --how ?
+why?
+====Query++++
+	--perform and combine many types of searches like structured, unstructured, geo, metric etc,...
+====Analyze+++
+	--help to understand billions of logs
+	--provide aggregations which help you zoom out to explore trends & patterns in our data.
+	
+advantages?
+====Scalablity++++
+	--scale across multiple nodes when ur load been increased
+====Really fast++++
+	--performance
+====Multilingual++++
+	--support several languages
+====Document Oriented++++
+	--stored as doc and o/p will be only json
+====Autocompletion & Instant Search++++
+====Schema Free++++
+	--stored in the form of doc
+installation ::skip
+
+Basic  Concepts:
+	Near Real Time::
+		--As soon as you insert the data into index it will available to search
+	Cluster::
+		--collection of 2 or more NODES that together holds the entire data.\
+		--provide federated indexing and search capabilities across all the nodes and identified by a unique name--default(ElasticSearch)
+	Node::
+		--Single server which is part of cluster, stores data & participates in the cluster's indexing and search capabilities
+	INDEX::
+		--Collection of doc with similiar characteristics and is identified by name
+		--can have multiple index
+		
+
+api convensions
+apis
+query dsl
+mapping
+analysis
+modules
+
+
+
+
+
+1) Full-text search engine
+2) NoSQL database
+3) Analytics engine
+4) written in Java
+5) Apache Lucene based (~solar)(its a search engine library)
+6) Inverted indices
+7) Easy to scale(~Elastic)
+8) RESTFull interface(HTTP/JSON)  --->respose only json format --read all kind of formats no need to dev java classes like connectors 
+9) Schemaless  -->its dynamic in nature for data types no need to create manually
+	Explicit Mapping comes in when it guess wrong data-type :::mention type:integer
+10)	Real-Time
+11) ELK stack
+
+
+RDMS          Elastic Search
+
+Database       index
+
+Table          Type
+
+Row 			Document
+
+
+Beside the Scences :
+Cluster : collection of nodes 
+index Structure:
+	Shards  
+	Replica
+	Node 
+	
+writr query in elastic search
+
+curl -XGET "http://localhost:9200/business/_search" -H 
+	'Content-Type:application/json' -d'
+	{
+	"query":{
+			"match_all":{}
+		}
+	}
+
+	: here business ---> index
+	
+
+
