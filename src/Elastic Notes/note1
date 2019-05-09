@@ -76,9 +76,10 @@ Row 			Document
 Beside the Scences :
 Cluster : collection of nodes 
 index Structure:
-	Shards  
-	Replica
-	Node 
+	index --> commbinations of shards
+	Shards  --> commbinations of segements
+	Replica --> copies of shards data
+	Node  --> if we have multiple nodes we make our search engine fast
 	
 writr query in elastic search
 
@@ -92,5 +93,36 @@ curl -XGET "http://localhost:9200/business/_search" -H
 
 	: here business ---> index
 	
+BackView:
+
+::When we index or delete the docs :: We have primary and replica :: so these will update one after date so that those will be always in synch
+	check video 7 for more info
+
+document --> ElasticSearch --> Analysis --> InvertedIndexStructure --> Buffers --> shards(segments) --> Immutable InvertedIndex -->searchable
+
+==========
+Analysis:::
+==========
+Analyzer has 2 steps ::
+.......INDEXING.....
+a)Tokenizer --break sentence into words
+b)Filter	
+	Remove Stop Words
+	Lowercasing
+	Stemming
+	synonyms
+......SEARCH.......
+	same thing as it done for INDEXING
+=======Need to COnfigure+++++++++
+this step we have to do before setting index 
+Configure the index Structure
+{
+	"settings":{
+		...
+	},
+	"mapping":{
+		...
+	},
+}
 
 

@@ -1,0 +1,197 @@
+1)What is commit, optimize,		
+--->in connectors we have options properties to be set as commitaftercrawl and optimizeaftercrawl to be set as true or false.
+2)How you’ll deploy project In attivio - 	
+--->we can deploy a project by first starting aie-agent and data-agent  then starting the aie client.
+3)How you’ll start/stop  services in attivio, 			
+--->we need to specify it in topology-layout.xml under <topology> elements. custom service would start on the nodes belonging to the customService nodeset.
+4)Questions on  aie- agent, aie-cli. 	
+--->The AIE Agent manages all AIE processes, and must be running on all host machines in your deployment before you can start any other processes
+The AIE Agent provides communications between the project control tools (AIE Designer, AIE-CLI) and the applications and services that make up the AIE project. The Agent must be running on all host machines in your deployment before you can start any other processes.	 
+--->AIE-Cli is used to manage different hosts as node,config,perfmon and store.
+It lets us start, stop and monitor multiple servers, and also provides tools for deploying the project's source files to the configuration servers.	
+5)How you’ll create project in attivio. What’s the command? 	
+--->createproject --name projectname -m modulename -o path
+6)What  is controlled query? 		
+--->allowing only restricted data to be shown based on user previllages
+7)How you’ll debug  attivio? we can do that using junit test cases and checking the logs as well local deployment logs
+8)How you’ll incrementally add the modules in attivio? 			
+--->by adding -i or -incremental to create project command after module name
+	createproject --name projectname -m modulename -i -o path
+9)Question on SiteHarvester         
+--->Site Harvester locates and harvests files on Web servers
+10)How to delete a document from attivio	
+---> using deleteDocByQuery and deleteDocumentbyId	 
+11)Question on crawling
+--->to update their web content or indices of others sites' web content.
+----------------------------------------------------------------------------------------------------------------
+1. What is partitioning and how is it useful? 			
+--->we use in universal indexing for quicker response. Partitioning divides the index file up into multiple parts (partitions) that are maintained and accessed on separate nodes.
+4. How to scale aie search		
+--->Boosting	term,static,phrase,freshness,completness,proximity,score
+	TERM: Term found in specified field 
+	Phrase : Multiple phrase terms found in the same field
+	Completeness : Field exactly matches query
+	Proximity : Terms near each other in field
+	Freshness : Newer documents are more relevant
+	Static  : Boost by a numeric field value
+	Expansion : Acronym, synonym, lemmatization…
+				Acronym :: ShortForm ::Eg : ETA ::: Estimated time of arrival
+5. How to add additional nodes to cluster? What are the configuration changes to be made? 	
+--->by using topology-nodes.xml in nodes we can add node
+6. How to debug if attivio is not responding?		
+--->check logs
+7. How to improve the response time in attivio		
+--->we can use multinodes - partitioning , duplicating
+8. How to make a field facetable?			
+--->Typically used in a presentation of search results that includes hit count by category in schema file we can mention it in facet=true or false
+9. How to implement relevancy search in attivio			
+--->Boosting
+10. How to increase the memory size for attivio nodes? 				
+--->we can specify that in <topology-nodes.xml> nodes field we can mention maxmem=2g
+11. How to incrementally crawl a document using file connector		
+--->in corresponding connector xml we can set incrementalMode as true
+12. Difference between stemming and lammetization using example
+	--->Stemming  --- suppose run,running,runnable ---run is the keyword
+	--->lammetization ---- find similiarity meaningful words
+14. How to mention the partition size   		  
+--->we can mention in index.index.xml  doubt????
+15. What is a block in lucene
+	--->Lucene is search library ...need to learn more ...mostly plays role in elastic search engines
+16. How to change the ranking/order of a search result   
+--->we can use boosting
+17. Difference between IDF and TF		
+		TF-->How many times a term is repeated in a same document
+		IDF -->How many times a term is repeated in different document
+----------------------------------------------------------------------------------------------------------------
+how to check score?		
+	AIE Admin > SAIL> DEBUG MODE> Search > Score.explain
+Steps involved in creating custom connector?		
+what is relevancy?		To what extent the result is matching to the search query.
+different types of boosters? 		term,static,phrase,freshness,completness,proximity,score
+different servers in attivio?  config, perfmon, store, node 
+what is inside nodes?		 connector,Ingestion Workflow,Index,Query Workflow
+what is text extraction?  extracting meaningful information from the text 
+what is entity extraction?  : 
+--->process of finding details in unstructed text
+--->elements are detected and classified into pre-defined categories, such as people, companies, locations.
+how to implement connector?
+how to implement custom workflow?
+----------------------------------------------------------------------------------------------------------------
+Tokenization - default and natural language?  ::Tokenization is the process of breaking up the text into tokens
+Default ;splits blocks of text into individual strings that are single words, punctuation marks, numbers
+eg : This dog's for ?<>sale!!! 
+o/p  :
+This
+dog
+s
+for
+sale
+----------------------------------------------------------------------------------------------------------------
+Natural Language Tokenizer: split text blocks into individual strings that are single words, punctuation marks, numbers,
+eg : This dog's for ?<>sale!!!
+o/p;
+This
+dog
+'
+s
+for
+?<>
+sale
+!!!
+----------------------------------------------------------------------------------------------------------------
+How to set highlight on a text ? in schema file we do highlight = true
+tokenization? break sentence into specific terms for proper search
+different types of connectors?	indexer,processor,connector,sercher
+Static fields --> just decleared fields and are added to all the doc which we crawl from this connnector
+dynamic fields --> rename the exisiting field name to new field
+optimize after crawl :  This uses previous crawl information 
+						page contents from the previous crawl hasn't changed, the page is not re-fed to the index.
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+Facted Search:  
+	Accessing information to explore a collection with multiple filters 
+Indexing:
+	In charge of the representation and organization of the material, allowing rapid access to the information.
+Searching:
+	In charge of extracting information from the index that satisfies the user information need.
+Ranking:
+	Although this is an optional task, it is also very important for the retrieval task. It is in charge of sorting the results, based on heuristics that try to determine which results satisfy better the user need.
+Scoring:
+	Using scoring algorithm(like default similiarity, BM25), set the score of the document while searching.
+Stop words:
+	Indicates if the indexer can use a list of words used as stop words in order to discard too frequent terms.
+Filetype:
+	The types of files the indexer is capable of parsing. The common filetype of the engines analyzed was HTML.
+Stemming:
+	If the indexer/searcher is capable of doing stemming operations over the words.
+Fuzzy Search:
+	Ability of solving queries in a fuzzy way, i.e. not necessarily matching the query exactly.
+Sort:
+	Ability to sort the results by several criteria.
+	
+Try site harvester
+
+Query-Time JOIN: 
+--->	is a technique that enables users to access and analyze all types of information, regardless of data source or type. 
+		It enables you to unify all your structured and unstructured data across every enterprise application – without flattening any data – thereby maintaining your existing data relationships. And it can all be done without building a data model (schema) in advance.
+
+Search Analytics: 
+	--->Search analytics applies statistics to search data itself, identifying trends (most frequent searches, most valued results). 
+		Search analytics is used to help understand and optimize performance.
+		
+Sentiment Analysis: Sentiment analysis identifies how a customer feels about a company’s products, services, or brand. 
+					Using statistical classification, it evaluates feedback to determine whether a statement is positive, negative, or neutral, and to determine how these statements relate to terms or concepts.
+
+Text Analysis: 	human conversation-->translating --> computer understands it, 
+				text analytics classifies, groups, clusters, and mines that information for concepts and patterns. 
+				Using a variety of techniques to get relevant answers.
+
+WhY ATTIVIO :
+	Artificial Intelligence (AI):
+	Enterprise Search:
+	Cognitive Search
+Cognitive Search:	It is “next generation” enterprise search. 
+					provide a more relevant search using AL Technologies
+					
+	
+result.
+
+INDEX PROCESS::
+DOC --- >  Analayzer  ---> IndexWriter ---> Directory
+Analayzer ::
+	Input - html 
+	Character Filter -->remove elements 
+	Tokenizer --> break sentence into words
+	TokenFilter-->stopwords
+	TokenFilter-->lowercase
+	IndexTerm
+
+Elastic :
+
+	API --respose only json format --read all kind of formats no need to dev java classes like connectors 
+	better connectivity 
+	schema freee??? --- its dynamic in nature for data types no need to create manually
+	Restfull
+	opensource
+	
+Stored Field ???? learn
+	A Field needs to be stored if the value of the field should be retrievable during a search, or if you're using highlighting or MoreLikeThis. It need not necessarily be marked as indexed unless it is required to be searched on.
+	
+incremental crawl 
+
+optimze after crawl "
+	Site Harvester uses the following previous crawl information for optimized crawls:
+	If any Site Harvester scanner properties are modified on subsequent crawls, the previous crawl history is discarded and all documents are re-ingested. This is because changes to parameters, like filtering, can affect calculations on previous link extraction and cause incorrect incremental crawl information.
+	
+	sitemapping --->sites 
+	-1 --> all
+	0 --> this 
+	1 ---depth 
+		
+https://answers.attivio.com/display/extranet430/Self-Guided+Tutorials
+
+
+https://answers.attivio.com/display/TRAIN/Attivio+Fundamentals
+
+https://answers.attivio.com/pages/viewpage.action?spaceKey=TRAIN&title=Developer+Basics
+
