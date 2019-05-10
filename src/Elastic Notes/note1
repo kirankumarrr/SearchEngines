@@ -145,3 +145,122 @@ PUT /customers/_mapping/online
 	}
 }
 
+
+Search DSL(Domain Specific Language) Component::::
+	Query Context
+	Filter Context
+		---> Both of these can also be combined to form more complex queries
+		
+Query Context::
+=============
+	0-> GET  /courses/_search
+		{
+		"query":{
+				"match_all":{}
+			}
+		}
+		//Match all ---> "*"
+	1->	GET  /courses/_search
+		{
+			"query":{
+				"match":{
+					"name" : "computers"
+				}
+			}
+		}
+		//Match ::: name:"computers"
+	2-> GET  /courses/_search
+		{  
+		   "query":{  
+			  "match":{  
+				 "exists":{  
+					"field":"professor.email"
+				 }
+			  }
+		   }
+		}
+		//Match ::: check wheather field exist ::return data else not found
+	3-> GET  /courses/_search
+		{  
+		   "query":{  
+			  "bool":{  
+				 "must":[  
+					{  
+					   "match":{  
+						  "name":"computers"
+					   }
+					},
+					{  
+					   "match":{  
+						  "room":"c4"
+					   }
+					}
+				 ]
+			  }
+		   }
+		}
+		//to search for multiple fields
+		4-> GET  /courses/_search
+		{  
+		   "query":{  
+			  "bool":{  
+				 "must":[  
+					{  
+					   "match":{  
+						  "name":"computers"
+					   }
+					},
+					{  
+					   "match":{  
+						  "room":"c4"
+					   }
+					}
+				 ]
+				 "must_not":[  
+					{  
+					   "match":{  
+						  "professor.name":"bill"
+					   }
+					}
+				 ]
+			  }
+		   }
+		}
+		//to search for multiple fields 
+		a) must -- matchs what we want and return data-type
+		b) must_not --if matches that data wont be returned
+		5-> GET  /courses/_search
+		{  
+		   "query":{  
+			  "bool":{  
+				 "must":[  
+					{  
+					   "match":{  
+						  "name":"computers"
+					   }
+					},
+					{  
+					   "match":{  
+						  "room":"c4"
+					   }
+					}
+				 ]
+				 "must_not":[  
+					{  
+					   "match":{  
+						  "professor.name":"bill"
+					   }
+					}
+				 ]
+				 "should" : [
+					{  
+					   "match":{  
+						  "professor.name":"bill"
+					   }
+					}
+					//ignored most in cases but we got one option to let know elastic that its required
+				 ]
+			  }
+			  "minimum_should_match" : 1
+		   }
+		}
