@@ -264,3 +264,229 @@ Query Context::
 			  "minimum_should_match" : 1
 		   }
 		}
+		6-> GET  /courses/_search
+		{  
+		   "query":{  
+			  "multi_match":{  
+				 "fields":[  
+					"name",
+					"professor.department"
+				 ],
+				 "query":"accounting"
+			  }
+		   }
+		}
+		//This "query":"accounting" should contain either in name or professor.department ::if occure in both score would be high
+		7-> GET  /courses/_search
+		{  
+		   "query":{  
+			  "multi_phrase":{ 
+				 "course_description":"accounting is contains"
+			  }
+		   }
+		}
+		//return that doc which satisfy this pharse completely
+		8-> GET  /courses/_search
+		{  
+		   "query":{  
+			  "multi_phrase_prefix":{ 
+				 "course_description":"accounting is conta"
+			  }
+		   }
+		}
+		//return that doc which satisfy this pharse (completely not mandatory)
+		9-> GET  /courses/_search
+		{     
+		   "query":{  
+			  "range":{ 
+				 "student_enrolled": {
+					"gte" : 10, /greaterthanequal  :::::gt ->greaterthan
+					"lte" : 20 //lesserthanequal
+				 }
+			  }
+		   }
+		}
+		10->Field Boosting::
+			"multi_match" : {
+					"query" : "market",
+					"field" : ["name", "course_description^2"] // boost with factor of 2 to get top most search
+			}
+BULK indexing :
+	--> helps to post multiple data into index
+	--> when we "match_all" we get only top 10 doc's ..if we want more to display we need to use "size" :::parameter
+	{
+		"form" : 0 //help pagination
+		"size" : 20, //get top 20
+		"query" : {
+				"match_all" :{}
+		}
+		"sort" : [
+			{"price" : {"order" : "desc"}}
+		]
+	}
+	
+Aggregation ::::
+++++++========+++++
+	--> allow powerfull data-analytics
+	--> GET  /courses/_count
+	{
+		"query" : {
+				"match" :{"make":"totyota"}
+		}
+	}
+	//get total count
+	// with the help of aggregations we get top overview
+	
+	--> GET  /courses/_search
+	{  
+	   "aggs":{  
+		  "popular_cars":{  
+			 "terms":{  
+				"field":"make.keyword"
+			 }
+		  }
+	   }
+	}
+	//get avg price of particular brand
+	"query":{  
+	   "match":{  
+		  "color":"red"
+	   }
+	},
+	{  
+	   "aggs":{  
+		  "popular_cars":{  
+			 "terms":{  
+				"field":"make.keyword"
+			 },
+			 "aggs":{  
+				"avg_price":{  
+				   "avg":{  
+					  "field":"price"                  //no keyword req since it's not a character
+				   }
+				}
+			 }
+		  }
+	   }
+	}
+	o/p::::
+	
+	"aggregations" : {
+		"popular_cars" : {
+			"docs_count_error_upper_bound" : 0,
+			"sum_other_doc_count" : 0,
+			"buckets" : [
+				{
+					"key" : "totyota",
+					"doc_count" : 5,
+					"avg_price" : {
+						"value" : 12900"
+					}
+				},
+				"max_price": {
+					"max": {
+						"field" : "price"
+					}
+				},
+				"min_price": {
+					"min": {
+						"field" : "price"
+					}
+				}
+				,{},{}
+			]
+		}
+	}
+	//Instead of using max,min,avg we use stats we get all this together
+	STATS:::
+	   "aggs":{  
+		  "popular_cars":{  
+			 "terms":{  
+				"field":"make.keyword"
+			 },   
+			 "aggs":{  
+				"stats_on_price":{  
+				   "stats":{  
+					  "field":"price"                  //no keyword req since it's not a character
+				   }
+				}
+			 }
+		  }
+	   }
+	}
+	o/p';::
+	{
+		{
+			"key" : "totyota",
+			"doc_count" : 5,
+			"stats_on_price" : {
+				"count" :2 ,
+				"min" : 12900",
+				"max" : 12900",
+				"avg" : 12900",
+				"sum" : 12900"
+			}
+		},
+	}
+	
+	BUCKETS and MATRIC
+	
+	here BUCKETS are "popular_cars":{}
+		MATRIC are "aggs":{}
+		
+		
+	RANGE::::
+	"aggs":{  
+		  "popular_cars":{  
+			 "terms":{  
+				"field":"make.keyword"
+			 },   
+			 "aggs":{  
+				"sold_date_ranges":{  
+				   "range": [
+					{
+						"from" : "2016-01-01",
+						"to" : "2016-05-18"
+					},
+					{
+						"from" : "2016-01-01",
+						"to" : "2016-05-18"
+					},
+				   ]
+				}
+			 }
+		  }
+	   }
+	}	
+	//aggs under aggs
+	"aggs":{  
+		  "popular_cars":{  
+			 "terms":{  
+				"field":"make.keyword"
+			 },   
+			 "aggs":{  
+				"sold_date_ranges":{  
+				   "range": [
+					{
+						"from" : "2016-01-01",
+						"to" : "2016-05-18"
+					},
+					{
+						"from" : "2016-01-01",
+						"to" : "2016-05-18"
+					},
+				   ]
+				},
+				"aggs":{
+					"avg_price" : {
+							"avg":	{
+								"field" : "price"
+							}
+					}
+				}
+			 }
+		  }
+	   }
+	}	
+
+	

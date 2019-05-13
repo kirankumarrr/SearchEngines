@@ -1,7 +1,7 @@
 {
-  "name": "ly6xxmqznm",
+  "name": "elasticsearch",
   "version": "0.0.0",
-  "description": null,
+  "description": "",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
