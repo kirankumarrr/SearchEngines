@@ -3,6 +3,67 @@
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <style>
+      .subactionlayeraddedlist li {
+        float: left;
+        padding: 5px 20px;
+      }
+      li.li-active {
+        background-color: #337ab7;
+      }
+      .clearboth::before {
+        content: '';
+      }
+      .clearboth::after {
+        display: block;
+        clear: both;
+        content: '';
+      }
+      .ActionLayer.actionHeading {
+        width: auto;
+        float: left;
+        border-radius: 0;
+        padding: 5px 8px;
+        background-color: #337ab7;
+        color: #fff;
+        margin: 5px;
+      }
+      li.li-inactive {
+        background: #fff;
+      }
+      .SubActionLayer {
+        width: 90%;
+        float: left;
+        background: #f5f5f5;
+      }
+      ul.subactionlayeraddedlist {
+        margin: 0;
+        list-style-type: none;
+        padding: 0;
+      }
+      .SubActionLayer .actionHeading {
+        margin: 10px 0 0;
+        font-size: 18px;
+        border-bottom: 2px solid #295d92;
+        margin-bottom: 5px;
+        display: inline-block;
+        padding: 0 10px 0 0;
+        color: #295d92;
+      }
+      #showLayer {
+        width: 100%;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+      }
+      .selectorActionsDIV {
+        display: inline-block;
+        width: 50%;
+        vertical-align: top;
+      }
+      .selectorAttributesDIV {
+        display: inline-block;
+        width: 49%;
+        vertical-align: top;
+      }
       .hide {
         display: none;
       }
@@ -10,10 +71,12 @@
         display: block;
       }
       #selectorAttributes {
-        width: 10em;
+        position: absolute;
+        width: 198px;
         height: 5em;
         border: solid 1px #c0c0c0;
         overflow: auto;
+        margin-left: 120px;
       }
 
       .multiselect label {
@@ -31,6 +94,12 @@
       .selectorAttributesDIV button {
         background: white;
         border: 1px solid;
+        width: 200px;
+      }
+      .selecteSpecfiLayer {
+        width: 100%;
+        height: 50px;
+        background: green;
       }
     </style>
   </head>
@@ -54,7 +123,6 @@
       </select>
     </div>
     <div class="selectorAttributesDIV hide">
-      <label for="selectorAttributes">Actions Attributes</label>
       <!-- <select name="selectorAttributes" id="selectorAttributes">
         <option value=""></option>
         <option value="charges" class="charges">Charges</option>
@@ -66,88 +134,104 @@
         <option value="measurements" class="measurements"></option>
         <option value="publications" class="publications"></option>
       </select> -->
-      <button
-        type="button"
-        class="multiselect dropdown-toggle btn btn-default"
-        data-toggle="dropdown"
-        title="None selected"
-        aria-expanded="false"
-      >
-        <span class="multiselect-selected-text">None selected</span>
-        <b class="caret"></b>
-      </button>
-      <div class="selectorAttributes" id="selectorAttributes">
-        <label
-          ><input
-            type="checkbox"
-            name="option[]"
-            value="selectall"
-            id="selectall"
-          />selectall</label
+      <div class="drop">
+        <label for="selectorAttributes">Actions Attributes</label>
+        <button
+          type="button"
+          class="multiselect dropdown-toggle btn btn-default"
+          data-toggle="dropdown"
+          title="None selected"
+          aria-expanded="false"
         >
-        <label
-          ><input
-            type="checkbox"
-            name="option[]"
-            value="Charges"
-          />Charges</label
-        >
-        <label
-          ><input
-            type="checkbox"
-            name="option[]"
-            value="Directions"
-          />Directions</label
-        >
-        <label
-          ><input
-            type="checkbox"
-            name="option[]"
-            value="Equipment"
-          />Equipment</label
-        >
-        <label
-          ><input
-            type="checkbox"
-            name="option[]"
-            value="Exclusions"
-          />Exclusions</label
-        >
-        <label
-          ><input
-            type="checkbox"
-            name="option[]"
-            value="Expertise"
-          />Expertise</label
-        >
-        <label
-          ><input type="checkbox" name="option[]" value="Material" />Material
-          List</label
-        >
-        <label
-          ><input
-            type="checkbox"
-            name="option[]"
-            value="Measurements"
-          />Measurements</label
-        >
-        <label
-          ><input
-            type="checkbox"
-            name="option[]"
-            value="Publications"
-          />Publications</label
-        >
+          <span class="multiselect-selected-text">None selected</span>
+          <b class="caret"></b>
+        </button>
+        <div class="selectorAttributes hide" id="selectorAttributes">
+          <label
+            ><input
+              type="checkbox"
+              name="option[]"
+              value="selectall"
+              id="selectall"
+            />selectall</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              name="option[]"
+              value="Charges"
+            />Charges</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              name="option[]"
+              value="Directions"
+            />Directions</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              name="option[]"
+              value="Equipment"
+            />Equipment</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              name="option[]"
+              value="Exclusions"
+            />Exclusions</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              name="option[]"
+              value="Expertise"
+            />Expertise</label
+          >
+          <label
+            ><input type="checkbox" name="option[]" value="Material" />Material
+            List</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              name="option[]"
+              value="Measurements"
+            />Measurements</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              name="option[]"
+              value="Publications"
+            />Publications</label
+          >
+        </div>
       </div>
     </div>
     <div>
       <input type="button" value="Add" class="subBtn hide" />
     </div>
-    <p>
-      CHECk
-    </p>
+    <div id="showLayer" class="clearboth">
+      <div class="ActionLayer actionHeading">Display</div>
+      <div class="SubActionLayer">
+        <h2 class="actionHeading">Display</h2>
+        <div class="SubActionLayerDetails">
+          <ul class="subactionlayeraddedlist clearboth">
+            <li class="li-active">Display</li>
+            <li class="li-inactive">Display</li>
+          </ul>
+          <div class="selecteSpecfiLayer"></div>
+        </div>
+      </div>
+    </div>
     <script>
       $(document).ready(function() {
+        $('.multiselect').on('click', function() {
+          $('#selectorAttributes').toggleClass('hide');
+        });
         var titleArr = [];
         $('#selectorActions').on('change', function() {
           console.log($(this));
@@ -226,7 +310,9 @@
                   .parent()
                   .addClass('multiselect-on');
                 if (!(titleArr.indexOf(checkbox.val()) > -1)) {
-                  titleArr.push(checkbox.val());
+                  if (checkbox.val() != 'selectall') {
+                    titleArr.push(checkbox.val());
+                  }
                 }
               });
             });
@@ -241,6 +327,28 @@
             });
           }
           console.log(titleArr);
+        });
+        // add
+        $('.subBtn').on('click', function() {
+          console.log(titleArr);
+          var html = '';
+          for (var i = 0; i < titleArr.length; i++) {
+            if (i == 0) {
+              html +=
+                '<li class="commoncls li-active">' + titleArr[i] + '</li>';
+            } else {
+              html +=
+                '<li class="commoncls li-inactive">' + titleArr[i] + '</li>';
+            }
+          }
+          $('.subactionlayeraddedlist').html(html);
+        });
+        $('.subactionlayeraddedlist').on('click', 'commoncls', function() {
+          alert();
+          // $(this)
+          //   .find('li-active')
+          //   .removeClass('li-active')
+          //   .addClass('li-inactive');
         });
       });
     </script>
