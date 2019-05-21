@@ -73,7 +73,7 @@
       #selectorAttributes {
         position: absolute;
         width: 198px;
-        height: 5em;
+        height: 10em;
         border: solid 1px #c0c0c0;
         overflow: auto;
         margin-left: 120px;
@@ -124,16 +124,16 @@
     </div>
     <div class="selectorAttributesDIV hide">
       <!-- <select name="selectorAttributes" id="selectorAttributes">
-        <option value=""></option>
-        <option value="charges" class="charges">Charges</option>
-        <option value="directions" class="directions">Directions</option>
-        <option value="equipment" class="equipment"></option>
-        <option value="exclusions" class="exclusions"></option>
-        <option value="expertise" class="expertise"></option>
-        <option value="materiallist" class="materiallist"></option>
-        <option value="measurements" class="measurements"></option>
-        <option value="publications" class="publications"></option>
-      </select> -->
+          <option value=""></option>
+          <option value="charges" class="charges">Charges</option>
+          <option value="directions" class="directions">Directions</option>
+          <option value="equipment" class="equipment"></option>
+          <option value="exclusions" class="exclusions"></option>
+          <option value="expertise" class="expertise"></option>
+          <option value="materiallist" class="materiallist"></option>
+          <option value="measurements" class="measurements"></option>
+          <option value="publications" class="publications"></option>
+        </select> -->
       <div class="drop">
         <label for="selectorAttributes">Actions Attributes</label>
         <button
@@ -219,7 +219,7 @@
       <div class="SubActionLayer">
         <h2 class="actionHeading">Display</h2>
         <div class="SubActionLayerDetails">
-          <ul class="subactionlayeraddedlist clearboth">
+          <ul class="subactionlayeraddedlist clearboth" id="subLayerContainer">
             <li class="li-active">Display</li>
             <li class="li-inactive">Display</li>
           </ul>
@@ -244,14 +244,13 @@
         });
         $('.selectorAttributes input').on('click', function() {
           var checkboxes = $('.selectorAttributes').find('input:checkbox');
-          var totalInputs = $('.selectorAttributes').find('input').length;
+          var totalInputs = $('.selectorAttributes').find('input').length - 1;
           var allinputs = $('.selectorAttributes').find('input');
 
           $(this).each(function() {
-            if ($(this).val() != 'selectall') {
-              checkboxes.each(function() {
+            checkboxes.each(function() {
+              if ($(this).val() != 'selectall') {
                 var checkbox = $(this);
-
                 if (checkbox.prop('checked')) {
                   checkbox.parent().addClass('multiselect-on');
                   if (!(titleArr.indexOf(checkbox.val()) > -1)) {
@@ -269,6 +268,7 @@
                     checkbox.parent().addClass('multiselect-on');
                   } else {
                     checkbox.parent().removeClass('multiselect-on');
+
                     if (
                       $('.selectorAttributes').find('.multiselect-on').length ==
                       0
@@ -277,23 +277,39 @@
                     }
                   }
                 });
-              });
-              console.log(titleArr);
-            }
+              }
+            });
+            console.log(titleArr);
+
             if ($('.selectorAttributes').find('.multiselect-on').length == 1) {
               $('.multiselect-selected-text').text($(this).val());
             } else {
-              $('.multiselect-selected-text').text(
-                $('.selectorAttributes').find('.multiselect-on').length +
-                  ' selected'
-              );
+              var a = $('.selectorAttributes').find('.multiselect-on').length;
+              $('.multiselect-selected-text').text(a + ' selected');
+            }
+            if (
+              $('.selectorAttributes').find('.multiselect-on').length ==
+              totalInputs
+            ) {
+              $('#selectall').prop('checked', true);
+              $('#selectall')
+                .parent()
+                .addClass('multiselect-on');
+            } else if (
+              $('.selectorAttributes').find('.multiselect-on').length !==
+              totalInputs
+            ) {
+              $('#selectall').prop('checked', false);
+              $('#selectall')
+                .parent()
+                .removeClass('multiselect-on');
             }
           });
         });
         $('#selectall').on('click', function() {
           titleArr = [];
           var checkboxes = $('.selectorAttributes').find('input:checkbox');
-          var totalInputs = $('.selectorAttributes').find('input').length;
+          var totalInputs = $('.selectorAttributes').find('input').length - 1;
           var allinputs = $('.selectorAttributes').find('input');
           if ($(this).prop('checked')) {
             $(this)
@@ -301,6 +317,7 @@
               .addClass('multiselect-on');
             checkboxes.each(function() {
               var checkbox = $(this);
+              totalInputs = totalInputs;
               $('.multiselect-selected-text').text(
                 'Seleted all' + '(' + totalInputs + ')'
               );
@@ -334,21 +351,22 @@
           var html = '';
           for (var i = 0; i < titleArr.length; i++) {
             if (i == 0) {
-              html +=
-                '<li class="commoncls li-active">' + titleArr[i] + '</li>';
+              html += '<li class="li-active">' + titleArr[i] + '</li>';
             } else {
-              html +=
-                '<li class="commoncls li-inactive">' + titleArr[i] + '</li>';
+              html += '<li class="li-inactive">' + titleArr[i] + '</li>';
             }
           }
           $('.subactionlayeraddedlist').html(html);
         });
-        $('.subactionlayeraddedlist').on('click', 'commoncls', function() {
-          alert();
-          // $(this)
-          //   .find('li-active')
-          //   .removeClass('li-active')
-          //   .addClass('li-inactive');
+        $('.SubActionLayerDetails').on('click', 'li', function() {
+          $(this)
+            .parent()
+            .find('.li-active')
+            .removeClass('li-active')
+            .addClass('li-inactive');
+          $(this)
+            .removeClass('li-inactive')
+            .addClass('li-active');
         });
       });
     </script>
