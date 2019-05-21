@@ -19,6 +19,7 @@
         content: '';
       }
       .ActionLayer.actionHeading {
+      	    text-transform: capitalize;
         width: auto;
         float: left;
         border-radius: 0;
@@ -72,6 +73,7 @@
       }
       #selectorAttributes {
         position: absolute;
+        background: #fff;
         width: 198px;
         height: 10em;
         border: solid 1px #c0c0c0;
@@ -98,7 +100,6 @@
       }
       .selecteSpecfiLayer {
         width: 100%;
-        height: 50px;
         background: green;
       }
     </style>
@@ -214,7 +215,7 @@
     <div>
       <input type="button" value="Add" class="subBtn hide" />
     </div>
-    <div id="showLayer" class="clearboth">
+    <div id="showLayer" class="clearboth hide">
       <div class="ActionLayer actionHeading">Display</div>
       <div class="SubActionLayer">
         <h2 class="actionHeading">Display</h2>
@@ -223,7 +224,166 @@
             <li class="li-active">Display</li>
             <li class="li-inactive">Display</li>
           </ul>
-          <div class="selecteSpecfiLayer"></div>
+          <div class="selecteSpecfiLayer comCharges">
+          	<table width="100%">
+			  <tr>
+			    <th>Charges</th>
+			    <th>Charges</th>
+			    <th>Charges</th>
+			  </tr>
+			  <tr>
+			    <td>Alfreds Futterkiste</td>
+			    <td>Maria Anders</td>
+			    <td>Germany</td>
+			  </tr>
+			  <tr>
+			    <td>Centro comercial Moctezuma</td>
+			    <td>Francisco Chang</td>
+			    <td>Mexico</td>
+			  </tr>
+			</table>
+
+          </div>
+          <div class="selecteSpecfiLayer comDirections hide">
+          	<table width="100%">
+			  <tr>
+			    <th>Directions</th>
+			    <th>Directions</th>
+			    <th>Directions</th>
+			  </tr>
+			  <tr>
+			    <td>Alfreds Futterkiste</td>
+			    <td>Maria Anders</td>
+			    <td>Germany</td>
+			  </tr>
+			  <tr>
+			    <td>Centro comercial Moctezuma</td>
+			    <td>Francisco Chang</td>
+			    <td>Mexico</td>
+			  </tr>
+			</table>
+
+          </div>
+           <div class="selecteSpecfiLayer comEquipment hide">
+          	<table width="100%">
+			  <tr>
+			    <th>comEquipment</th>
+			    <th>comEquipment</th>
+			    <th>comEquipment</th>
+			  </tr>
+			  <tr>
+			    <td>Alfreds Futterkiste</td>
+			    <td>Maria Anders</td>
+			    <td>Germany</td>
+			  </tr>
+			  <tr>
+			    <td>Centro comercial Moctezuma</td>
+			    <td>Francisco Chang</td>
+			    <td>Mexico</td>
+			  </tr>
+			</table>
+
+          </div>
+           <div class="selecteSpecfiLayer comExclusions hide">
+          	<table width="100%">
+			  <tr>
+			    <th>Exclusions</th>
+			    <th>Exclusions</th>
+			    <th>Exclusions</th>
+			  </tr>
+			  <tr>
+			    <td>Alfreds Futterkiste</td>
+			    <td>Maria Anders</td>
+			    <td>Germany</td>
+			  </tr>
+			  <tr>
+			    <td>Centro comercial Moctezuma</td>
+			    <td>Francisco Chang</td>
+			    <td>Mexico</td>
+			  </tr>
+			</table>
+
+          </div>
+           <div class="selecteSpecfiLayer comExpertise hide">
+          	<table width="100%">
+			  <tr>
+			    <th>Expertise</th>
+			    <th>Expertise</th>
+			    <th>Expertise</th>
+			  </tr>
+			  <tr>
+			    <td>Alfreds Futterkiste</td>
+			    <td>Maria Anders</td>
+			    <td>Germany</td>
+			  </tr>
+			  <tr>
+			    <td>Centro comercial Moctezuma</td>
+			    <td>Francisco Chang</td>
+			    <td>Mexico</td>
+			  </tr>
+			</table>
+
+          </div>
+           <div class="selecteSpecfiLayer comMaterial hide">
+          	<table width="100%">
+			  <tr>
+			    <th>Material</th>
+			    <th>Material</th>
+			    <th>Material</th>
+			  </tr>
+			  <tr>
+			    <td>Alfreds Futterkiste</td>
+			    <td>Maria Anders</td>
+			    <td>Germany</td>
+			  </tr>
+			  <tr>
+			    <td>Centro comercial Moctezuma</td>
+			    <td>Francisco Chang</td>
+			    <td>Mexico</td>
+			  </tr>
+			</table>
+
+          </div>
+           <div class="selecteSpecfiLayer comMeasurements hide">
+          	<table width="100%">
+			  <tr>
+			    <th>Measurements</th>
+			    <th>Measurements</th>
+			    <th>Measurements</th>
+			  </tr>
+			  <tr>
+			    <td>Alfreds Futterkiste</td>
+			    <td>Maria Anders</td>
+			    <td>Germany</td>
+			  </tr>
+			  <tr>
+			    <td>Centro comercial Moctezuma</td>
+			    <td>Francisco Chang</td>
+			    <td>Mexico</td>
+			  </tr>
+			</table>
+
+          </div>
+           <div class="selecteSpecfiLayer comPublications hide">
+          	<table width="100%">
+			  <tr>
+			    <th>comPublications</th>
+			    <th>comPublications</th>
+			    <th>comPublications</th>
+			  </tr>
+			  <tr>
+			    <td>Alfreds Futterkiste</td>
+			    <td>Maria Anders</td>
+			    <td>Germany</td>
+			  </tr>
+			  <tr>
+			    <td>Centro comercial Moctezuma</td>
+			    <td>Francisco Chang</td>
+			    <td>Mexico</td>
+			  </tr>
+			</table>
+
+          </div>
         </div>
       </div>
     </div>
@@ -287,23 +447,7 @@
               var a = $('.selectorAttributes').find('.multiselect-on').length;
               $('.multiselect-selected-text').text(a + ' selected');
             }
-            if (
-              $('.selectorAttributes').find('.multiselect-on').length ==
-              totalInputs
-            ) {
-              $('#selectall').prop('checked', true);
-              $('#selectall')
-                .parent()
-                .addClass('multiselect-on');
-            } else if (
-              $('.selectorAttributes').find('.multiselect-on').length !==
-              totalInputs
-            ) {
-              $('#selectall').prop('checked', false);
-              $('#selectall')
-                .parent()
-                .removeClass('multiselect-on');
-            }
+          
           });
         });
         $('#selectall').on('click', function() {
@@ -357,8 +501,13 @@
             }
           }
           $('.subactionlayeraddedlist').html(html);
+           $(".ActionLayer.actionHeading").text($("#selectorActions").val());
+          $("#showLayer").removeClass("hide");
+
         });
         $('.SubActionLayerDetails').on('click', 'li', function() {
+        	var current = $(this).text();
+        	var previous = $(this).parent().find('.li-active').text();
           $(this)
             .parent()
             .find('.li-active')
@@ -367,7 +516,10 @@
           $(this)
             .removeClass('li-inactive')
             .addClass('li-active');
+             $(".com"+current).removeClass('hide');
+     		$(".com"+previous).addClass('hide');
         });
+
       });
     </script>
   </body>
