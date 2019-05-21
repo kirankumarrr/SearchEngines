@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <style>
+      .hide {
+        display: none;
+      }
+      .show {
+        display: block;
+      }
+      #selectorAttributes {
+        width: 10em;
+        height: 5em;
+        border: solid 1px #c0c0c0;
+        overflow: auto;
+      }
+
+      .multiselect label {
+        display: block;
+      }
+
+      .multiselect-on {
+        color: #ffffff;
+        background-color: #000099;
+      }
+      #selectorAttributes label {
+        width: 100%;
+        display: block;
+      }
+      .selectorAttributesDIV button {
+        background: white;
+        border: 1px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="selectorActionsDIV">
+      <label for="selectorActions">Actions</label>
+      <select name="selectorActions" id="selectorActions">
+        <option value=""></option>
+        <option value="assemble">Assemble</option>
+        <option value="clean">Cleaning</option>
+        <option value="der">DER</option>
+        <option value="disassemble">Disassemble</option>
+        <option value="evaluate">Evaluate</option>
+        <option value="inspect">Inspect</option>
+        <option value="partout">Part Out</option>
+        <option value="qc">QC</option>
+        <option value="receive">Receive</option>
+        <option value="ship">Shipping</option>
+        <option value="teardown">Teardown</option>
+        <option value="testing">Test</option>
+      </select>
+    </div>
+    <div class="selectorAttributesDIV hide">
+      <label for="selectorAttributes">Actions Attributes</label>
+      <!-- <select name="selectorAttributes" id="selectorAttributes">
+        <option value=""></option>
+        <option value="charges" class="charges">Charges</option>
+        <option value="directions" class="directions">Directions</option>
+        <option value="equipment" class="equipment"></option>
+        <option value="exclusions" class="exclusions"></option>
+        <option value="expertise" class="expertise"></option>
+        <option value="materiallist" class="materiallist"></option>
+        <option value="measurements" class="measurements"></option>
+        <option value="publications" class="publications"></option>
+      </select> -->
+      <button
+        type="button"
+        class="multiselect dropdown-toggle btn btn-default"
+        data-toggle="dropdown"
+        title="None selected"
+        aria-expanded="false"
+      >
+        <span class="multiselect-selected-text">None selected</span>
+        <b class="caret"></b>
+      </button>
+      <div class="selectorAttributes" id="selectorAttributes">
+        <label
+          ><input
+            type="checkbox"
+            name="option[]"
+            value="selectall"
+            id="selectall"
+          />selectall</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            name="option[]"
+            value="Charges"
+          />Charges</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            name="option[]"
+            value="Directions"
+          />Directions</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            name="option[]"
+            value="Equipment"
+          />Equipment</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            name="option[]"
+            value="Exclusions"
+          />Exclusions</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            name="option[]"
+            value="Expertise"
+          />Expertise</label
+        >
+        <label
+          ><input type="checkbox" name="option[]" value="Material" />Material
+          List</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            name="option[]"
+            value="Measurements"
+          />Measurements</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            name="option[]"
+            value="Publications"
+          />Publications</label
+        >
+      </div>
+    </div>
+    <div>
+      <input type="button" value="Add" class="subBtn hide" />
+    </div>
+    <p>
+      CHECk
+    </p>
+    <script>
+      $(document).ready(function() {
+        var titleArr = [];
+        $('#selectorActions').on('change', function() {
+          console.log($(this));
+          if ($(this).val() !== '') {
+            $('.selectorAttributesDIV, .subBtn').removeClass('hide');
+          } else {
+            $('.selectorAttributesDIV,.subBtn').addClass('hide');
+          }
+          console.log($(this).val());
+        });
+        $('.selectorAttributes input').on('click', function() {
+          var checkboxes = $('.selectorAttributes').find('input:checkbox');
+          var totalInputs = $('.selectorAttributes').find('input').length;
+          var allinputs = $('.selectorAttributes').find('input');
+
+          $(this).each(function() {
+            if ($(this).val() != 'selectall') {
+              checkboxes.each(function() {
+                var checkbox = $(this);
+
+                if (checkbox.prop('checked')) {
+                  checkbox.parent().addClass('multiselect-on');
+                  if (!(titleArr.indexOf(checkbox.val()) > -1)) {
+                    titleArr.push(checkbox.val());
+                  }
+                } else {
+                  var index = titleArr.indexOf(checkbox.val());
+                  if (index > -1) {
+                    titleArr.splice(index, 1);
+                  }
+                }
+
+                checkbox.click(function() {
+                  if (checkbox.prop('checked')) {
+                    checkbox.parent().addClass('multiselect-on');
+                  } else {
+                    checkbox.parent().removeClass('multiselect-on');
+                    if (
+                      $('.selectorAttributes').find('.multiselect-on').length ==
+                      0
+                    ) {
+                      $('.multiselect-selected-text').text('Not selected');
+                    }
+                  }
+                });
+              });
+              console.log(titleArr);
+            }
+            if ($('.selectorAttributes').find('.multiselect-on').length == 1) {
+              $('.multiselect-selected-text').text($(this).val());
+            } else {
+              $('.multiselect-selected-text').text(
+                $('.selectorAttributes').find('.multiselect-on').length +
+                  ' selected'
+              );
+            }
+          });
+        });
+        $('#selectall').on('click', function() {
+          titleArr = [];
+          var checkboxes = $('.selectorAttributes').find('input:checkbox');
+          var totalInputs = $('.selectorAttributes').find('input').length;
+          var allinputs = $('.selectorAttributes').find('input');
+          if ($(this).prop('checked')) {
+            $(this)
+              .parent()
+              .addClass('multiselect-on');
+            checkboxes.each(function() {
+              var checkbox = $(this);
+              $('.multiselect-selected-text').text(
+                'Seleted all' + '(' + totalInputs + ')'
+              );
+              allinputs.each(function() {
+                $(this).prop('checked', true);
+                $(this)
+                  .parent()
+                  .addClass('multiselect-on');
+                if (!(titleArr.indexOf(checkbox.val()) > -1)) {
+                  titleArr.push(checkbox.val());
+                }
+              });
+            });
+          } else {
+            $('.multiselect-selected-text').text('None selected');
+            allinputs.each(function() {
+              $(this).prop('checked', false);
+              $(this)
+                .parent()
+                .removeClass('multiselect-on');
+              titleArr = [];
+            });
+          }
+          console.log(titleArr);
+        });
+      });
+    </script>
+  </body>
+</html>
