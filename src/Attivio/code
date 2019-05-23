@@ -1,0 +1,79 @@
+
+public class DateFormaterClass {
+	
+	
+	public static void main(String[] args) throws ParseException {
+		String dateStr = "2019-04-19 10:00";  ///date format
+		
+		String pattern = "yyyy-MMM-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+		String date = simpleDateFormat.format(new Date(dateStr));
+		System.out.println(date);
+		System.out.println(date.getClass().getSimpleName());
+        //19-Jan-2019 //date format
+	}
+}
+
+
+
+
+	String dateStr = "2019-04-19 10:00";  ///date format
+		
+		String pattern = "yyyy-MMM-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+		@SuppressWarnings("deprecation")
+		String date = simpleDateFormat.format(new Date());
+		System.out.println(date);
+		System.out.println(date.getC	lass().getSimpleName());
+        //19-Jan-2019 //date format
+
+
+
+package com.attivio.format;
+
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+
+public class DateFormaterClass {
+	
+	
+	public static void main(String[] args) throws ParseException {
+		String sDate1="2019-04-19 10:00";   
+	    SimpleDateFormat formatter6=new SimpleDateFormat("yyyy-MM-dd hh:mm");  
+	    Date date6=formatter6.parse(sDate1); 
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(date6);
+	    int year = cal.get(Calendar.YEAR);
+	    int month = cal.get(Calendar.MONTH);
+	    System.out.println(month); //3 but expected Mar
+	    int dayOfMonth = cal.get(Calendar.DATE);
+	    LocalDate currentDate = LocalDate.of(year, month, dayOfMonth);
+	    System.out.println(currentDate.getMonth().name());
+	    LocalDate id = LocalDate.of(year, currentDate.getMonth(), dayOfMonth);
+	    Date date2 = java.sql.Date.valueOf(id);
+	    System.out.println(date2);//2019-03-19
+//	    Date Format ok but problem with month ---Mar should be the output
+	    System.out.println("DATE  --?"+date2.getClass().getSimpleName());
+	    Period diff = Period.between(currentDate, id);
+	   
+	    System.out.println(id.getClass().getSimpleName());
+	    System.out.println(id);
+	    
+	 
+	    String PATTERN="yyyy-MMM-dd";
+	    SimpleDateFormat dateFormat=new SimpleDateFormat();
+	    dateFormat.applyPattern(PATTERN);
+	    String date11=dateFormat.format(Calendar.getInstance().getTime());
+	    System.out.println(date11);
+	    System.out.println(date11.getClass().getSimpleName());
+	}
+}
