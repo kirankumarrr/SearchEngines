@@ -77,3 +77,21 @@ public class DateFormaterClass {
 	    System.out.println(date11.getClass().getSimpleName());
 	}
 }
+
+
+
+
+String dateStr = "2019-04-19 10:00";  ///date format
+DateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm");
+Date date = sdf.parse(dateStr);
+System.out.println("DateFormat: Sat Jan 19 10:00:00 IST 2019::--->"+date);
+System.out.println("DateType: Date::--->"+date.getClass().getSimpleName());
+String finalDate = new SimpleDateFormat("dd-MMM-yyyy").format(date);
+System.out.println("DateFormat: 19-Jan-2019::--->"+finalDate);
+System.out.println("DateType: String:--->"+finalDate.getClass().getSimpleName());
+
+System.out.println("Given date is " + dateStr);
+LocalDateTime Locdate = LocalDateTime.parse(dateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+System.out.println(Locdate);
+System.out.println("MM/dd/yyyy formatted date : " + DateTimeFormatter.ofPattern("dd-MMM-yyyy").format(Locdate));
+System.out.println("DateType: String:--->"+DateTimeFormatter.ofPattern("dd-MMM-yyyy").format(Locdate).getClass().getSimpleName());
