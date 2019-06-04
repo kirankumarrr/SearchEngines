@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+
+
+
+
+body{
+margin-left: 80px;
+background-color: Gray;
+}
+.common {
+    color: white;
+    padding: 20px;
+}
+.common label {
+    width: 20%;
+    display: inline-block;
+}
+</style>
+</head>
+
+<h2>Form</h2>
+<body>
+<form action="/action_page.php">
+  <div class="register common">
+	  <label> First Name:</label>
+	  <input name="firstname" type="text" placeholder = "ex: Madan" required>
+  </div>
+ 
+  <div class="register common">
+	  <label> Last Name:</label>
+	  <input name="Lastname" type="text" placeholder = "ex: Mohan" required>
+  </div>
+
+
+  <div class="email common">
+	  <label for="Email"> Email:</label>
+	  <input name="Email" type="text" placeholder = "ex: madan@gmail.com" required>
+ </div>
+
+  <div class="gender common">
+	  <label> Gender:</label>
+	  <input type="radio" name="gender" value="male" checked>Male
+	  <input type="radio" name="gender" value="Female" required>Female
+  </div>
+
+  <div class="newpas common">
+	  <label> New Password:</label>
+	  <input type="password" name="password" placeholder = "Enter atleast 8 characters" required>
+  </div><br>
+
+  <div class="conpas common">
+  <label> Confirm Password:</label>
+  <input type="password" name="password" placeholder = "Enter atleast 8 characters" required>
+  </div><br>
+
+  <input type="submit">
+</form>
+
+
+</body>
+</html>
