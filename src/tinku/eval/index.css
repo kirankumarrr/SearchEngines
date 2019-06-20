@@ -1,0 +1,140 @@
+*{
+  box-sizing: border-box;
+}
+
+
+.container{
+  width: 1300px;
+  padding: 20px;
+  border: 2px solid #00A0DC;
+
+}
+.headerLeft {
+    width: 84.5%;
+    display: inline-block;
+    vertical-align: top;
+}
+.headerRight {
+    display: inline-block;
+    background: #00a0dc;
+    width: 15%;
+    vertical-align: top;
+    box-sizing: border-box;
+    height: 30px;
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 30px;
+}
+
+
+
+
+
+h2{
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  color: #8C9093;
+}
+
+h3{
+  margin: 0;
+}
+.subContainer{
+  padding: 30px;
+}
+
+.sectionLeft {
+    width: 50%;
+    float: left;
+}
+.common{
+  padding: 20px;
+}
+
+.inputRight{
+  float: right;
+}
+
+.inputPd{
+  width: 385px;
+}
+
+.sectionRight{
+     width: 50%;
+    float: right;
+}
+
+.topBlock{
+  width: 100%;
+  height: 200px;
+}
+
+.boxContainerRight{
+  float: right;
+}
+.clearfix:before{
+	content:""
+}
+.clearfix:after{
+	content:"";
+	clear:both;
+}
+.text-section {
+    width: 50%;
+    float: left;
+}
+.btn-section {
+    width: 50%;
+    float: right;
+}
+.subSectionInsurance {
+    margin-top: 10px;
+}
+
+label.label-in {
+    width: 50%;
+    float: left;
+}
+
+.sectionRight .inputRight {
+    width: 50%;
+    float: right;
+}
+.selfPay,.selfProc,.workComp,.workers	{
+	    width: 100%;
+    display: block;
+    height: 20px;
+    margin: 20px 0;
+}
+.levelContainer-head {
+    width: 400px;
+        border: 1px solid #BFC0C1;
+    font-size: 15px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    font-weight: bold;
+}
+.levelContainer-sublayer {
+    width: 400px;
+    border-top: 1px solid #BFC0C1;
+    border-left: 1px solid #BFC0C1;
+    border-right: 1px solid #BFC0C1;
+    font-size: 15px;
+    height: 38px;
+    line-height: 38px;
+    padding-left: 10px;
+}
+.levelContainer-sublayer.lastlevellayer {
+    border-bottom: 1px solid #BFC0C1;
+    line-height: normal;
+    padding: 10px;
+}
+.bottom-box {
+    border: 1px solid #BFC0C1;
+    text-align: center;
+    color: #BFC0C1;
+}
